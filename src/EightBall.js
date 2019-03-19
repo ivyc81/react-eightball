@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import './EightBall.css';
 
 class EightBall extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
+    static defaultState = {
             currentColor: 'black',
             currentMsg: 'Think of a Question.',
-        }
+    }
+
+    constructor(props){
+        super(props);
+        this.state = {...EightBall.defaultState}
+
         this.handleClick = this.handleClick.bind(this);
+        this.reset = this.reset.bind(this);
     }
 
     static defaultProps = {
@@ -42,6 +46,10 @@ class EightBall extends Component {
         return this.props.answers[Math.floor(Math.random()*this.props.answers.length)];
     }
 
+    // getRandomChoice(arr){
+    //     return arr[Math.floor(Math.random()*arr)];
+    // }
+
     handleClick(evt){
         const { msg, color} = this.getRandom();
 
@@ -51,11 +59,18 @@ class EightBall extends Component {
         });
     }
 
+    reset(evt){
+        this.setState(EightBall.defaultState);
+    }
+
     render() {
         const style = {backgroundColor: this.state.currentColor};
         return (
-            <div className="EightBall" onClick={ this.handleClick } style={style}>
-                <b>{ this.state.currentMsg }</b>
+            <div>
+                <div className="EightBall" onClick={ this.handleClick } style={style}>
+                    <b>{ this.state.currentMsg }</b>
+                </div>
+                <button onClick={this.reset}> Reset </button>
             </div>
         );
     }
