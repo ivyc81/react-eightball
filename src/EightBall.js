@@ -40,18 +40,13 @@ class EightBall extends Component {
         ]
     }
 
-    /** returns a random answer object from this.props.answers */
-
-    getRandom(){
-        return this.props.answers[Math.floor(Math.random()*this.props.answers.length)];
+    getRandomChoice(arr){
+        console.log(arr[Math.floor(Math.random()*arr.length)])
+        return arr[Math.floor(Math.random()*arr.length)];
     }
 
-    // getRandomChoice(arr){
-    //     return arr[Math.floor(Math.random()*arr)];
-    // }
-
     handleClick(evt){
-        const { msg, color} = this.getRandom();
+        const { msg, color} = this.getRandomChoice(this.props.answers);
 
         this.setState({
             currentColor: color,
